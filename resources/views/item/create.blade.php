@@ -2,7 +2,8 @@
 
 @section('body')
     <div class="container">
-        {!! Form::open(['route' => 'items.store']) !!}
+        @include('layouts.flash-messages')
+        {!! Form::open(['route' => 'items.store', 'files' => true]) !!}
         {!! Form::label('desc', 'item name', ['class' => 'form-label']) !!}
         {!! Form::text('description', null, ['class' => 'form-control', 'id' => 'desc']) !!}
         
@@ -14,6 +15,12 @@
 
         {!! Form::label('qty', 'quantity', ['class' => 'form-label']) !!}
         {!! Form::number('quantity', 0, ['class' => 'form-control', 'id' => 'qty' ]) !!}
+
+        {!! Form::label('image', 'upload image', ['class' => 'form-control']) !!}
+        {!! Form::file('image',  ['class' => 'form-control']) !!}
+        @error('image')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         {!! Form::submit('Add item',  ['class'=> "btn btn-primary"]) !!}
         {!! Form::close() !!}
